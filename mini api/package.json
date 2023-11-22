@@ -1,0 +1,21 @@
+{
+  "name": "mini-api",
+  "version": "1.0.0",
+  "description": "In deze mini-API kun je CRUD-acties uitvoeren op JSON-bestanden.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "crud",
+    "json",
+    "files"
+  ],
+  "author": "Pascal Thong",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

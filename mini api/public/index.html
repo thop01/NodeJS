@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini api</title>
+</head>
+<body>
+    <header>
+        <h1>Mini api</h1>
+        <p>In deze mini-API kun je CRUD-acties uitvoeren op JSON-bestanden.</p>
+        <!-- a form creating a file -->
+     
+            <label for="FileName">Filename</label>
+            <input type="text" id="FileName" value="test" required>
+            <button id="FindButton">Find</button>
+    
+    </header>
+    <script type="module" defer>
+        FindButton.addEventListener('click', function (){
+            if(FileName.checkValidity()){
+                findFile(FileName.value);
+            }else{
+                alert("Something wrong in your filename");
+            }
+        });
+
+
+    
+
+        function findFile(fileName){
+            fetch(`api/files/${fileName}`, {method:"GET"})
+                .then(response => response.json())
+                .then(data => {
+                    if(data.error){
+                        alert(data.error);
+                        const newFile = confirm("do you like to create an new file?");
+                        alert(newFile);
+                        if(newFile){
+                            createFile(fileName);
+                            FileName.disabled = true;
+                        }
+                    }
+                })
+        }
+
+        //fetch data with a post request
+        function createFile(fileName){
+                fetch(`api/files/${fileName}`, {
+                    method: "POST"
+                })
+                    .then(response => {
+                        console.log(response);
+                        return response.text();
+                    })
+                    .then(text => {
+                        alert(text);
+                        //todo show;
+                    });
+            }
+        
+    </script>
+</body>
+</html>
